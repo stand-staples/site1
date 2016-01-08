@@ -1,6 +1,7 @@
 from django.conf.urls import include, url
-from . import views
+from django.views.generic.base import TemplateView
 
+from . import views
 from .api import PatientList, PatientDetail
 
 patients_urls = [
@@ -9,6 +10,9 @@ patients_urls = [
 ]
 
 urlpatterns = [
+    url(r'^index/$', views.index_view, name = "index-view"),
+    url(r'^index2/$', TemplateView.as_view(template_name="simp/base.html"), name = "base-view"),
+  
     url(r'^patients', include(patients_urls)),
 ]
 

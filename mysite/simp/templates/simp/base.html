@@ -1,0 +1,53 @@
+{% verbatim %}
+<html ng-app="myApp" ng-controller="myCtrl">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<head>
+  <title>Using API</title>
+</head>
+
+<body>
+  <div>
+    <h1>Input :
+      <input type="text" ng-model="name" placeholder="Enter name here">
+    </h1>
+    <!--          <p>Enter your Name: <input type = "text" ng-model = "name"></p> -->
+    <h3>Output1: <span ng-bind="name"></span> ! </h3>
+    <h3>Output2: {{name}} ! </h3>
+    <p> {{data}} </p>
+  </div>
+
+
+  <script>
+    var app = angular.module('myApp', []);
+
+    app.controller('myCtrl', ['$scope', '$http', function($scope, $http) {
+      a = $http.get('/ex/patients/?format=json').
+      then(function(response) {
+        $scope.status = response.status;
+        $scope.data = response.data;
+      }, function(response) {
+        $scope.data = response.data || "Request failed";
+        $scope.status = response.status;
+      });;
+      console.log($scope);
+    }]);
+  </script>
+
+</body>
+
+</html>
+
+
+{% endverbatim %}
+
+<!-- <!DOCTYPE html>
+<html ng-app = "">
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<body>
+
+<p>Input something in the input box:</p>
+
+
+</body>
+</html> -->
